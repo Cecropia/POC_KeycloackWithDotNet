@@ -60,10 +60,10 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore ./KeyCloakIntegration/KeyCloakIntegration.sln
 
       - name: Build solution
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build ./KeyCloakIntegration/KeyCloakIntegration.sln --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test --configuration Release --no-build --filter FullyQualifiedName~UnitTests
+        run: dotnet test ./KeyCloakIntegration/KeyCloakIntegration.sln --configuration Release --no-build --filter FullyQualifiedName~UnitTests
