@@ -4,6 +4,7 @@ using KeyCloakIntegration.Infrastructure.Data;
 using KeyCloakIntegration.Web.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,12 @@ namespace KeyCloakIntegration.Web
             services.AddScoped<IUser, CurrentUser>();
 
             services.AddHttpContextAccessor();
+
+            // Configure EF Core with SQLite
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(connectionString)); // Use SQLite instead of SQL Server
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
@@ -69,6 +76,7 @@ namespace KeyCloakIntegration.Web
 
             return services;
         }
+
 
         public static IServiceCollection AddKeyVaultIfConfigured(this IServiceCollection services, ConfigurationManager configuration)
         {

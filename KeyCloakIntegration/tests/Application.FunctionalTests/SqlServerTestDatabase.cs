@@ -32,7 +32,7 @@ public class SqlServerTestDatabase : ITestDatabase
         _connection = new SqlConnection(_connectionString);
 
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseSqlServer(_connectionString)
+            .UseSqlite(_connectionString) // Use SQLite instead of SQL Server
             .Options;
 
         var context = new ApplicationDbContext(options);
