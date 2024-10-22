@@ -1,5 +1,15 @@
 # POC_KeycloackWithDotNet
 
+---
+
+### Development Environment Limitation
+
+This application can be run on macOS; however, its development is limited to computers running Windows operating systems due to issues with NuGet central package version management in Visual Studio for Mac. While Visual Studio for Mac used central package version management, package versions must be defined using the `PackageVersion` item rather than within `PackageReference` items. Microsoft withdrew support for Visual Studio for Mac at the end of August 2023, which further limits the development on macOS platforms. 
+
+For full development capabilities, it is recommended to use Visual Studio on Windows.
+
+---
+
 # KeyCloak Setup
 1. Install [Docker](https://www.docker.com/products/docker-desktop/)
 1. Pull KeyCloak image from DockerHub with the following command 
