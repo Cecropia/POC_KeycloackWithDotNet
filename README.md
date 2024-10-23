@@ -12,16 +12,17 @@ For full development capabilities, it is recommended to use Visual Studio on Win
 
 # KeyCloak Setup
 1. Install [Docker](https://www.docker.com/products/docker-desktop/)
-1. Pull KeyCloak image from DockerHub with the following command 
-`docker pull keycloak/keycloak`
 1. Create the operational network with the following command `docker network create keycloak_net`
-1. Start Keycloak with the following command `docker run  --net keycloak_net --name keycloak -p 8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.0.0 start-dev` This command starts Keycloak exposed on the local port 8080 and creates an initial admin user with the `username admin` and `password admin`.
+1. From [Keycloak DockerFile directory](/KeyCloak/) run : `docker-compose --env-file env up --build -d`
+   1. user name and password can be edited form the [env file](/KeyCloak/env)
+   1. Keycloak version can be updated from the [env file](/KeyCloak/env)
+   1. Seed Realm, Clients and Users can be edited from the [realm json file](/KeyCloak/Multiplied.json) or a different json file can be reference from the [env file](/KeyCloak/env)
 1. Log in into [Keycloak](http://localhost:8080/admin)
 
 # DotNet Setup
-1. From [DockerFile directory](/KeyCloakIntegration/) run: `docker build -t dotnet_keycloak-image -f DockerFile .`
+1. From [.NET DockerFile directory](/KeyCloakIntegration/) run: `docker build -t dotnet_keycloak-image -f DockerFile .`
 1. Start app with the following command `docker run  --net keycloak_net --name dotnet_app  -d -p 8081:8080 dotnet_keycloak-image`
-1. Navigate to [app]((http://localhost:8081/)
+1. Navigate to [app](http://localhost:8081/)
 
 # GitHub Actions
 

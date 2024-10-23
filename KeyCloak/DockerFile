@@ -1,0 +1,20 @@
+services:
+  auth:
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}
+    container_name: keycloak
+    ports:
+      - "8080:8080"
+    networks:
+      - keycloak_net
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_USER} 
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
+    command: 
+      - start-dev 
+      - --import-realm
+    volumes:
+      - ./Multiplied.json:/opt/keycloak/data/import/realm.json
+networks:
+    keycloak_net:
+      name: keycloak_net
+      external: true
