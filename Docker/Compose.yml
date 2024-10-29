@@ -7,14 +7,20 @@ services:
     networks:
       - keycloak_net
     environment:
-      KEYCLOAK_ADMIN: ${KEYCLOAK_USER} 
+      KEYCLOAK_ADMIN: ${KEYCLOAK_USER}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_PASSWORD}
-    command: 
-      - start-dev 
+    command:
+      - start-dev
       - --import-realm
     volumes:
       - ./Multiplied.json:/opt/keycloak/data/import/realm.json
+  app:
+    container_name: keycloak_net
+    ports:
+      - "8081:8080"
+    networks:
+      - keycloak_net
+    build: ../KeycloakIntegration/
 networks:
-    keycloak_net:
-      name: keycloak_net
-      external: true
+  keycloak_net:
+    name: keycloak_net
