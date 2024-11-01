@@ -9,6 +9,14 @@ This application can be run on macOS; however, its development is limited to com
 For full development capabilities, it is recommended to use Visual Studio on Windows.
 
 ---
+# Prerequisites
+1. [Visual Studio](https://visualstudio.microsoft.com/)
+1. Node
+   1. Download NVM installer for node version managment from [repository](https://github.com/coreybutler/nvm-windows/releases)
+   1. Open a new Powershell terminal and run `nvm install lts`
+   1. At the end of the command run an instruction like `nvm use version` will be prompted execute it
+   1. close current Powershell terminal and open a new one and verify node version with `node -v` it should output a node version 
+
 
 # Environment Setup
 1. Install [Docker](https://www.docker.com/products/docker-desktop/)
