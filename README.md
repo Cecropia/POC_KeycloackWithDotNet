@@ -13,9 +13,9 @@ For full development capabilities, it is recommended to use Visual Studio on Win
 # Environment Setup
 1. Install [Docker](https://www.docker.com/products/docker-desktop/)
 1. From [Docker compose folder](/Docker/) run : `docker-compose --env-file env up --build -d`
-   1. user name and password for Keycloak can be edited form the [env file](/KeyCloak/env)
-   1. Keycloak version can be updated from the [env file](/KeyCloak/env)
-   1. Seed Realm, Clients and Users can be edited from the [realm json file](/KeyCloak/Multiplied.json) or a different json file can be reference from the [env file](/KeyCloak/env)
+   1. user name and password for Keycloak can be edited form the [env file](/Docker/env)
+   1. Keycloak version can be updated from the [env file](/Docker/env)
+   1. Seed Realm, Clients and Users can be edited from the [realm json file](/Docker/Multiplied.json) or a different json file can be reference from the [env file](/Docker/env)
 1. Log in into [Keycloak](http://localhost:8080/admin)
 1. Navigate to [app](http://localhost:8081/)
 
