@@ -1,4 +1,5 @@
 using KeyCloakIntegration.Infrastructure.Data;
+using Keycloak.AuthServices.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddKeyVaultIfConfigured(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebServices();
+builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -42,8 +45,10 @@ app.MapFallbackToFile("index.html");
 
 app.UseExceptionHandler(options => { });
 
-
 app.MapEndpoints();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
 
