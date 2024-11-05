@@ -53,6 +53,59 @@ Currently, the following workflows are active:
 ## How to View CI Results
 
 1. Navigate to the "Actions" tab of the repository to view recent workflow runs.
-2. Click on a specific workflow run to view the detailed output of the build and test process.
+1. Click on a specific workflow run to view the detailed output of the build and test process.
 
 These CI workflows are essential for maintaining project health, ensuring that code changes are reliable, and providing a strong foundation for future development.
+
+## How to create an audience 
+
+An audience in Keycloak is a specific identifier that can be included in access tokens. This allows you to control which services or applications can accept a particular token, enhancing security and fine-grained access control.
+
+To create an audience for a client in Keycloak, which we’ll call `untrusted-audience`, follow these steps:
+
+### Step 1: Log in to Keycloak Admin Console
+1. Open the Keycloak Admin Console by navigating to `http://<keycloak-host>:8080` in your browser.
+1. Log in with an admin account.
+
+### Step 2: Create or Select a Realm
+1. In the left sidebar, select the **Realm** where you want to create the audience.
+1. If you need a new realm, you can create one by selecting **Add Realm** and entering a name.
+
+### Step 3: Create a Client Scope
+1. Click **Client Scopes** tab.
+1. Click **Create Client Scopes** to add a new client scope.
+1. Give it a name, e.g., `untrusted-audience`.
+1. Select OpenID Connect as the client protocol.
+1. Set Type to `Optional`.
+
+### Step 4: Create an Audience Mapper:
+   - Go to the **Mappers** tab of your client.
+   - Click **Create**.
+   - Select **Mapper Type** as **Audience**.
+   - In the **Included Custom Audience** field, enter the desired audience value, such as `your-api-endpoint`.
+   - Enable the **Add to Access Token** checkbox.
+
+### Step 5:  **Assign the Client Scope to Your Client:
+   - Go to the **Client Scopes** tab of your client.
+   - Add the newly created client scope (`api-audience`) to your client.
+
+**Understanding the Process:**
+
+- **Client Scope:** This defines a logical grouping of permissions. In this case, we're creating a scope solely for the purpose of adding an audience to tokens.
+- **Audience Mapper:** This maps a specific value (the audience) to the access token. By enabling the "Add to Access Token" option, the specified audience will be included in the `aud` claim of the token.
+
+## How to Use the Audience:
+
+**On the Resource Server:**
+   - include the scope variable in you login request.
+   - When your resource server (e.g., an API) receives an access token, it can validate the `aud` claim.
+   - If the `aud` claim matches the expected audience (in our case, `your-api-endpoint`), the token is considered valid for that specific resource. 
+
+## Additional Considerations:
+
+- **Multiple Audiences:** You can add multiple audiences to a single client by creating additional audience mappers.
+- **Dynamic Audiences:** For more advanced scenarios, you might consider using dynamic client scopes or other Keycloak features to generate audiences based on specific conditions.
+- **Security Best Practices:** Always validate tokens on your resource servers to ensure they are valid and intended for your specific service.
+
+## Summary
+These steps create a client called `untrusted-audience` and configure it so that when tokens are issued, they contain the `aud` claim with `untrusted-audience`. This enables services to validate that tokens are specifically intended for the `untrusted-audience` client.
