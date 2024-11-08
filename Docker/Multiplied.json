@@ -410,6 +410,20 @@
   "scopeMappings" : [ {
     "clientScope" : "offline_access",
     "roles" : [ "offline_access" ]
+  }, {
+    "id" : "ccb4aee3-ec17-411c-80b6-9febb88fae4e",
+    "username" : "service-account-keycloakintegration",
+    "emailVerified" : false,
+    "createdTimestamp" : 1729688610160,
+    "enabled" : true,
+    "totp" : false,
+    "serviceAccountClientId" : "KeyCloakIntegration",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-multiplied" ],
+    "notBefore" : 0,
+    "groups" : [ ]
   } ],
   "clientScopeMappings" : {
     "account" : [ {
@@ -429,6 +443,7 @@
     "enabled" : true,
     "alwaysDisplayInConsole" : false,
     "clientAuthenticatorType" : "client-secret",
+    "secret" : "C9ZzKoldRgXoeVwDg0y9BdQlfb643Ppn",
     "redirectUris" : [ "http://localhost:8081/*" ],
     "webOrigins" : [ "http://localhost:8081" ],
     "notBefore" : 0,

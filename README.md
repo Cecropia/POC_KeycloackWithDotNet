@@ -24,8 +24,8 @@ For full development capabilities, it is recommended to use Visual Studio on Win
    1. user name and password for Keycloak can be edited form the [env file](/Docker/env)
    1. Keycloak version can be updated from the [env file](/Docker/env)
    1. Seed Realm, Clients and Users can be edited from the [realm json file](/Docker/Multiplied.json) or a different json file can be reference from the [env file](/Docker/env)
-1. Log in into [Keycloak](http://localhost:8080/admin)
-1. Navigate to [app](http://localhost:8081/)
+1. Log in into [Keycloak](http://localhost:8080/admin) Use the user **admin** password **admin** 
+1. Navigate to [app](http://localhost:8081/), In order to login in the app use the user **johndoe** password **jhondoe123**
 
 # GitHub Actions
 
