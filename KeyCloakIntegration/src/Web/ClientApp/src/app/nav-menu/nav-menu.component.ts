@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,6 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent {
+
+  constructor(protected readonly keycloak: KeycloakService) {
+    this.keycloak = keycloak;
+  }
+
   isExpanded = false;
 
   collapse() {
@@ -14,5 +20,9 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  async logOut() {
+    await this.keycloak.logout(window.location.origin);
   }
 }
