@@ -57,6 +57,34 @@ Currently, the following workflows are active:
 
 These CI workflows are essential for maintaining project health, ensuring that code changes are reliable, and providing a strong foundation for future development.
 
+
+### Creating a Client in a Keycloak Realm
+
+To set up a client in Keycloak, follow these steps to create either a Machine-to-Machine (M2M) client or a standard user-facing client with regular login functionality.
+
+#### Steps to Create a Client
+
+1. **Access the Keycloak Admin Console**: Navigate to your Keycloak admin console and select the desired realm.
+
+1. **Create a New Client**:
+   - Go to **Clients** in the sidebar.
+   - Click **Create** and provide a unique **Client ID**. Choose a descriptive name to indicate the client’s purpose (e.g., "MyAppAPI" for M2M, "MyAppWeb" for user logins).
+
+#### Machine-to-Machine (M2M) Clients
+
+Machine-to-machine clients are used for server-to-server communication, where the client authenticates using its credentials rather than relying on a user login flow. The setup includes enabling client authentication and specifying the audience scope.
+
+1. **Client Authentication**: Under the **Settings** tab, make sure that **Service Accounts Enabled** is set to **ON**. This will allow the client to authenticate itself using client credentials (e.g., client ID and secret).
+1. **Scope & Audience:** Define the required audience and specify the scopes that this client can access within your application. Follow the steps  [## How to create an audience]
+
+#### Regular Login Clients
+
+For user-facing clients, such as web applications, the primary configuration involves enabling browser-based authentication without client credentials or specialized audience scopes.
+
+1. **Disable Client Authentication**:
+   - Since users log in directly, there is no need for the client to authenticate itself. **Service Accounts Enabled** should be set to **OFF**.
+
+
 ## How to create an audience 
 
 An audience in Keycloak is a specific identifier that can be included in access tokens. This allows you to control which services or applications can accept a particular token, enhancing security and fine-grained access control.
@@ -75,19 +103,21 @@ To create an audience for a client in Keycloak, which we’ll call `untrusted-au
 1. Click **Client Scopes** tab.
 1. Click **Create Client Scopes** to add a new client scope.
 1. Give it a name, e.g., `untrusted-audience`.
-1. Select OpenID Connect as the client protocol.
 1. Set Type to `Optional`.
 
 ### Step 4: Create an Audience Mapper:
-   - Go to the **Mappers** tab of your client.
-   - Click **Create**.
-   - Select **Mapper Type** as **Audience**.
+   - Go to the **Mappers** tab of your client scope.
+   - Click **Configure a new mapper**.
+   - Select **Audience**.
+   - Complete your audience **Name**.
    - In the **Included Custom Audience** field, enter the desired audience value, such as `your-api-endpoint`.
    - Enable the **Add to Access Token** checkbox.
 
 ### Step 5:  **Assign the Client Scope to Your Client:
+   - Go to the **Clients** list.
+   - Select **Your Client ID**.
    - Go to the **Client Scopes** tab of your client.
-   - Add the newly created client scope (`api-audience`) to your client.
+   - Add the newly created client scope  ()`untrusted-audience`) to your client.
 
 **Understanding the Process:**
 
